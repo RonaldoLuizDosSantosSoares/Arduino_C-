@@ -1,6 +1,3 @@
-// ronaldo luiz dos santos soares
-// 
-
 // #define EX_O1
 // #define EX_O2
 // #define EX_O3
