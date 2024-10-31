@@ -2,6 +2,8 @@
 
 #define EX_01
 
+// 1 – Acrescente um buzzer a montagem. Modifique o programa para o led acender e o buzzer apitar
+
 #ifdef EX_01
 
 int ledPin = 13;     // LED no pino 13
@@ -33,6 +35,8 @@ void loop() {
 #endif
 
 // #define EX_02
+
+// 2 – Acrescente mais 2 leds a montagem. Conforme a luminosidade diminui os leds vão acendendo progressivamente. O buzzer deve apitar quando o último led acender.
 
 #ifdef EX_02
 
@@ -71,6 +75,8 @@ void loop() {
 #endif
 
 // #define EX_03
+
+// 3- Transforme a leitura do sensor de luminosidade em uma função que retorna o valor lido.
 
 #ifdef EX_03
 
@@ -112,6 +118,8 @@ void loop() {
 #endif
 
 // #define EX_04
+
+// 4 – Transforme o controle de cada um dos led em uma função que recebe o valor lido.
 
 #ifdef EX_04
 
@@ -165,6 +173,8 @@ void loop() {
 #endif
 
 // #define EX_05
+
+// 5 – Transforme o controle do buzzer em uma função que recebe o valor lido
 
 #ifdef EX_05
 
