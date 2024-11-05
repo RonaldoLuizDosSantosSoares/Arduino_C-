@@ -35,7 +35,7 @@ delay(100);
 
 #endif
 
-#define EX_02
+// #define EX_02
 
 // 2 – Acrescente mais 2 leds a montagem. Conforme a luminosidade diminui os leds vão acendendo progressivamente. O buzzer deve apitar quando o último led acender.
 
@@ -60,9 +60,9 @@ void loop() {
     ldrValor = analogRead(ldrPin);
     Serial.println(ldrValor);
 
-    if (ldrValor >= 700) digitalWrite(ledPin1, HIGH); else digitalWrite(ledPin1, LOW);
-    if (ldrValor >= 500) digitalWrite(ledPin2, HIGH); else digitalWrite(ledPin2, LOW);
-    if (ldrValor >= 300) { digitalWrite(ledPin3, HIGH); tone(buzzerPin, 2000); // Aciona o buzzer
+    if (ldrValor >= 800) digitalWrite(ledPin1, HIGH); else digitalWrite(ledPin1, LOW);
+    if (ldrValor >= 600) digitalWrite(ledPin2, HIGH); else digitalWrite(ledPin2, LOW);
+    if (ldrValor >= 400) { digitalWrite(ledPin3, HIGH); tone(buzzerPin, 2000); // Aciona o buzzer
     } else {
         digitalWrite(ledPin3, LOW);
         noTone(buzzerPin);     // Desativa o buzzer
@@ -82,7 +82,7 @@ void loop() {
 int ledPin1 = 13;
 int ledPin2 = 12;
 int ledPin3 = 11;
-int buzzerPin = 7;
+int buzzerPin = 10;
 int ldrPin = A0;
 
 int lerLDR() {
@@ -101,9 +101,9 @@ void loop() {
     int ldrValor = lerLDR();
     Serial.println(ldrValor);
 
-    if (ldrValor < 700) digitalWrite(ledPin1, HIGH); else digitalWrite(ledPin1, LOW);
-    if (ldrValor < 500) digitalWrite(ledPin2, HIGH); else digitalWrite(ledPin2, LOW);
-    if (ldrValor < 300) { digitalWrite(ledPin3, HIGH);
+    if (ldrValor < 800) digitalWrite(ledPin1, HIGH); else digitalWrite(ledPin1, LOW);
+    if (ldrValor < 600) digitalWrite(ledPin2, HIGH); else digitalWrite(ledPin2, LOW);
+    if (ldrValor < 400) { digitalWrite(ledPin3, HIGH);
         tone(buzzerPin, 2000);
     } else {
         digitalWrite(ledPin3, LOW);
@@ -124,7 +124,7 @@ void loop() {
 int ledPin1 = 13;
 int ledPin2 = 12;
 int ledPin3 = 11;
-int buzzerPin = 7;
+int buzzerPin = 10;
 int ldrPin = A0;
 
 int lerLDR() {
@@ -132,15 +132,15 @@ int lerLDR() {
 }
 
 void controlarLED1(int ldrValor) {
-    digitalWrite(ledPin1, ldrValor < 700 ? HIGH : LOW);
+    digitalWrite(ledPin1, ldrValor < 800 ? HIGH : LOW);
 }
 
 void controlarLED2(int ldrValor) {
-    digitalWrite(ledPin2, ldrValor < 500 ? HIGH : LOW);
+    digitalWrite(ledPin2, ldrValor < 600 ? HIGH : LOW);
 }
 
 void controlarLED3(int ldrValor) {
-    digitalWrite(ledPin3, ldrValor < 300 ? HIGH : LOW);
+    digitalWrite(ledPin3, ldrValor < 400 ? HIGH : LOW);
 }
 
 void setup() {
@@ -159,7 +159,7 @@ void loop() {
     controlarLED2(ldrValor);
     controlarLED3(ldrValor);
 
-    if (ldrValor < 300) {
+    if (ldrValor < 400) {
         tone(buzzerPin, 2000);
     } else {
         noTone(buzzerPin);
@@ -170,7 +170,7 @@ void loop() {
 
 #endif
 
-// #define EX_05
+#define EX_05
 
 // 5 – Transforme o controle do buzzer em uma função que recebe o valor lido
 
@@ -179,7 +179,7 @@ void loop() {
 int ledPin1 = 13;
 int ledPin2 = 12;
 int ledPin3 = 11;
-int buzzerPin = 7;
+int buzzerPin = 10;
 int ldrPin = A0;
 
 int lerLDR() {
@@ -187,19 +187,19 @@ int lerLDR() {
 }
 
 void controlarLED1(int ldrValor) {
-    digitalWrite(ledPin1, ldrValor < 700 ? HIGH : LOW);
+    digitalWrite(ledPin1, ldrValor < 800 ? HIGH : LOW);
 }
 
 void controlarLED2(int ldrValor) {
-    digitalWrite(ledPin2, ldrValor < 500 ? HIGH : LOW);
+    digitalWrite(ledPin2, ldrValor < 600 ? HIGH : LOW);
 }
 
 void controlarLED3(int ldrValor) {
-    digitalWrite(ledPin3, ldrValor < 300 ? HIGH : LOW);
+    digitalWrite(ledPin3, ldrValor < 400 ? HIGH : LOW);
 }
 
 void controlarBuzzer(int ldrValor) {
-    if (ldrValor < 300) {
+    if (ldrValor < 400) {
         tone(buzzerPin, 2000);
     } else {
         noTone(buzzerPin);
