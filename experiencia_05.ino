@@ -1,6 +1,6 @@
 //Sensor de temperatura usando o LM35
 
-#define EX_01
+// #define EX_01
 
 // 1 – Acrescente um buzzer a montagem. Modifique o programa para o led acender e o buzzer apitar.
 
@@ -9,7 +9,7 @@
 int LM35 = A0;       // Define o pino que lê a saída do LM35
 float temperatura;   // Variável que armazena a temperatura medida
 int ledPin = 13;     // LED no pino 13
-int buzzerPin = 7;   // Buzzer no pino 7
+int buzzerPin = 10;   // Buzzer no pino 7
 
 void setup() {
     pinMode(ledPin, OUTPUT);
@@ -22,7 +22,7 @@ void loop() {
     Serial.print("Temperatura: ");
     Serial.println(temperatura);
 
-    if (temperatura >= 27) {
+    if (temperatura >= 30) {
         digitalWrite(ledPin, HIGH);
         tone(buzzerPin, 2000); // Apita o buzzer
     } else {
@@ -46,7 +46,7 @@ float temperatura;
 int ledPin1 = 13;     // Primeiro LED no pino 13
 int ledPin2 = 12;     // Segundo LED no pino 12
 int ledPin3 = 11;     // Terceiro LED no pino 11
-int buzzerPin = 7;
+int buzzerPin = 10;
 
 void setup() {
     pinMode(ledPin1, OUTPUT);
@@ -61,9 +61,9 @@ void loop() {
     Serial.print("Temperatura: ");
     Serial.println(temperatura);
 
-    digitalWrite(ledPin1, temperatura >= 27 ? HIGH : LOW);
-    digitalWrite(ledPin2, temperatura >= 30 ? HIGH : LOW);
-    if (temperatura >= 35) {
+    digitalWrite(ledPin1, temperatura >= 30 ? HIGH : LOW);
+    digitalWrite(ledPin2, temperatura >= 35 ? HIGH : LOW);
+    if (temperatura >= 40) {
         digitalWrite(ledPin3, HIGH);
         tone(buzzerPin, 2000);
     } else {
@@ -87,7 +87,7 @@ float temperatura;
 int ledPin1 = 13;
 int ledPin2 = 12;
 int ledPin3 = 11;
-int buzzerPin = 7;
+int buzzerPin = 10;
 
 float lerTemperatura() {
     return (((analogRead(LM35) * 5.0) / 1023) * 1000 - 500) / 10;
@@ -106,9 +106,9 @@ void loop() {
     Serial.print("Temperatura: ");
     Serial.println(temperatura);
 
-    digitalWrite(ledPin1, temperatura >= 27 ? HIGH : LOW);
-    digitalWrite(ledPin2, temperatura >= 30 ? HIGH : LOW);
-    if (temperatura >= 35) {
+    digitalWrite(ledPin1, temperatura >= 30 ? HIGH : LOW);
+    digitalWrite(ledPin2, temperatura >= 35 ? HIGH : LOW);
+    if (temperatura >= 40) {
         digitalWrite(ledPin3, HIGH);
         tone(buzzerPin, 2000);
     } else {
@@ -132,22 +132,22 @@ float temperatura;
 int ledPin1 = 13;
 int ledPin2 = 12;
 int ledPin3 = 11;
-int buzzerPin = 7;
+int buzzerPin = 10;
 
 float lerTemperatura() {
     return (((analogRead(LM35) * 5.0) / 1023) * 1000 - 500) / 10;
 }
 
 void controlarLED1(float temperatura) {
-    digitalWrite(ledPin1, temperatura >= 27 ? HIGH : LOW);
+    digitalWrite(ledPin1, temperatura >= 30 ? HIGH : LOW);
 }
 
 void controlarLED2(float temperatura) {
-    digitalWrite(ledPin2, temperatura >= 30 ? HIGH : LOW);
+    digitalWrite(ledPin2, temperatura >= 35 ? HIGH : LOW);
 }
 
 void controlarLED3(float temperatura) {
-    digitalWrite(ledPin3, temperatura >= 35 ? HIGH : LOW);
+    digitalWrite(ledPin3, temperatura >= 40 ? HIGH : LOW);
 }
 
 void setup() {
@@ -167,7 +167,7 @@ void loop() {
     controlarLED2(temperatura);
     controlarLED3(temperatura);
 
-    if (temperatura >= 35) {
+    if (temperatura >= 40) {
         tone(buzzerPin, 2000);
     } else {
         noTone(buzzerPin);
@@ -178,7 +178,7 @@ void loop() {
 
 #endif
 
-// #define EX_05
+#define EX_05
 
 // 5 – Transforme o controle do buzzer em uma função que recebe o valor lido.
 
@@ -189,26 +189,26 @@ float temperatura;
 int ledPin1 = 13;
 int ledPin2 = 12;
 int ledPin3 = 11;
-int buzzerPin = 7;
+int buzzerPin = 10;
 
 float lerTemperatura() {
     return (((analogRead(LM35) * 5.0) / 1023) * 1000 - 500) / 10;
 }
 
 void controlarLED1(float temperatura) {
-    digitalWrite(ledPin1, temperatura >= 27 ? HIGH : LOW);
+    digitalWrite(ledPin1, temperatura >= 30 ? HIGH : LOW);
 }
 
 void controlarLED2(float temperatura) {
-    digitalWrite(ledPin2, temperatura >= 30 ? HIGH : LOW);
+    digitalWrite(ledPin2, temperatura >= 35 ? HIGH : LOW);
 }
 
 void controlarLED3(float temperatura) {
-    digitalWrite(ledPin3, temperatura >= 35 ? HIGH : LOW);
+    digitalWrite(ledPin3, temperatura >= 40 ? HIGH : LOW);
 }
 
 void controlarBuzzer(float temperatura) {
-    if (temperatura >= 35) {
+    if (temperatura >= 40) {
         tone(buzzerPin, 2000);
     } else {
         noTone(buzzerPin);
