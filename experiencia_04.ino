@@ -1,13 +1,13 @@
 // testando sensor solar
 
-#define EX_01
+// #define EX_01
 
 // 1 – Acrescente um buzzer a montagem. Modifique o programa para o led acender e o buzzer apitar
 
 #ifdef EX_01
 
 int ledPin = 13;     // LED no pino 13
-int buzzerPin = 7;   // Buzzer no pino 7
+int buzzerPin = 10;   // Buzzer no pino 10
 int ldrPin = A0;     // Sensor LDR no pino analógico A0
 int ldrValor = 0;    // Variável para armazenar o valor lido do LDR
 
@@ -23,18 +23,19 @@ void loop() {
 
     if (ldrValor >=500) {
         digitalWrite(ledPin, HIGH);
-        tone(buzzerPin, 2000); // Aciona o buzzer
+        tone(buzzerPin, 1000); // Aciona o buzzer
     } else {
         digitalWrite(ledPin, LOW);
-        noTone(buzzerPin);     // Desativa o buzzer
+        noTone(buzzerPin);  // Desativa o buzzer
     }
-
-    delay(100);
+  
+delay(100);
+    
 }
 
 #endif
 
-// #define EX_02
+#define EX_02
 
 // 2 – Acrescente mais 2 leds a montagem. Conforme a luminosidade diminui os leds vão acendendo progressivamente. O buzzer deve apitar quando o último led acender.
 
@@ -43,7 +44,7 @@ void loop() {
 int ledPin1 = 13;     // Primeiro LED no pino 13
 int ledPin2 = 12;     // Segundo LED no pino 12
 int ledPin3 = 11;     // Terceiro LED no pino 11
-int buzzerPin = 7;    // Buzzer no pino 7
+int buzzerPin = 10;    // Buzzer no pino 10
 int ldrPin = A0;      // Sensor LDR no pino analógico A0
 int ldrValor = 0;
 
