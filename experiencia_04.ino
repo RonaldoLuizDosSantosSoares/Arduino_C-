@@ -60,11 +60,11 @@ void loop() {
     ldrValor = analogRead(ldrPin);
     Serial.println(ldrValor);
 
-    if (ldrValor >= 800) digitalWrite(ledPin1, HIGH); else digitalWrite(ledPin1, LOW);
-    if (ldrValor >= 600) digitalWrite(ledPin2, HIGH); else digitalWrite(ledPin2, LOW);
-    if (ldrValor >= 400) { digitalWrite(ledPin3, HIGH); tone(buzzerPin, 2000); // Aciona o buzzer
+    if (ldrValor > 800) digitalWrite(ledPin1, HIGH); else digitalWrite(ledPin1, LOW);
+    if (ldrValor > 600) digitalWrite(ledPin2, HIGH); else digitalWrite(ledPin2, LOW);
+    if (ldrValor > 400) { digitalWrite(ledPin3, HIGH); tone(buzzerPin, 2000); // Aciona o buzzer
     } else {
-        digitalWrite(ledPin3, LOW);
+        digitalWrite(ledPin3,LOW);
         noTone(buzzerPin);     // Desativa o buzzer
     }
 
