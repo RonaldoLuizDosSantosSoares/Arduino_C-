@@ -9,7 +9,7 @@
 int LM35 = A0;       // Define o pino que lê a saída do LM35
 float temperatura;   // Variável que armazena a temperatura medida
 int ledPin = 13;     // LED no pino 13
-int buzzerPin = 10;   // Buzzer no pino 7
+int buzzerPin = 10;
 
 void setup() {
     pinMode(ledPin, OUTPUT);
