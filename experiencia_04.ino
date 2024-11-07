@@ -101,9 +101,9 @@ void loop() {
     int ldrValor = lerLDR();
     Serial.println(ldrValor);
 
-    if (ldrValor < 800) digitalWrite(ledPin1, HIGH); else digitalWrite(ledPin1, LOW);
-    if (ldrValor < 600) digitalWrite(ledPin2, HIGH); else digitalWrite(ledPin2, LOW);
-    if (ldrValor < 400) { digitalWrite(ledPin3, HIGH);
+    if (ldrValor > 800) digitalWrite(ledPin1, HIGH); else digitalWrite(ledPin1, LOW);
+    if (ldrValor > 600) digitalWrite(ledPin2, HIGH); else digitalWrite(ledPin2, LOW);
+    if (ldrValor > 400) { digitalWrite(ledPin3, HIGH);
         tone(buzzerPin, 2000);
     } else {
         digitalWrite(ledPin3, LOW);
@@ -132,15 +132,15 @@ int lerLDR() {
 }
 
 void controlarLED1(int ldrValor) {
-    digitalWrite(ledPin1, ldrValor < 800 ? HIGH : LOW);
+    digitalWrite(ledPin1, ldrValor > 800 ? HIGH : LOW);
 }
 
 void controlarLED2(int ldrValor) {
-    digitalWrite(ledPin2, ldrValor < 600 ? HIGH : LOW);
+    digitalWrite(ledPin2, ldrValor > 600 ? HIGH : LOW);
 }
 
 void controlarLED3(int ldrValor) {
-    digitalWrite(ledPin3, ldrValor < 400 ? HIGH : LOW);
+    digitalWrite(ledPin3, ldrValor > 400 ? HIGH : LOW);
 }
 
 void setup() {
@@ -159,7 +159,7 @@ void loop() {
     controlarLED2(ldrValor);
     controlarLED3(ldrValor);
 
-    if (ldrValor < 400) {
+    if (ldrValor > 400) {
         tone(buzzerPin, 2000);
     } else {
         noTone(buzzerPin);
@@ -170,7 +170,7 @@ void loop() {
 
 #endif
 
-#define EX_05
+// #define EX_05
 
 // 5 – Transforme o controle do buzzer em uma função que recebe o valor lido
 
@@ -187,19 +187,19 @@ int lerLDR() {
 }
 
 void controlarLED1(int ldrValor) {
-    digitalWrite(ledPin1, ldrValor < 800 ? HIGH : LOW);
+    digitalWrite(ledPin1, ldrValor > 800 ? HIGH : LOW);
 }
 
 void controlarLED2(int ldrValor) {
-    digitalWrite(ledPin2, ldrValor < 600 ? HIGH : LOW);
+    digitalWrite(ledPin2, ldrValor > 600 ? HIGH : LOW);
 }
 
 void controlarLED3(int ldrValor) {
-    digitalWrite(ledPin3, ldrValor < 400 ? HIGH : LOW);
+    digitalWrite(ledPin3, ldrValor > 400 ? HIGH : LOW);
 }
 
 void controlarBuzzer(int ldrValor) {
-    if (ldrValor < 400) {
+    if (ldrValor > 400) {
         tone(buzzerPin, 2000);
     } else {
         noTone(buzzerPin);
