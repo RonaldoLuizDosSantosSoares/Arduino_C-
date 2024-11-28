@@ -1,3 +1,5 @@
+//Desafio 2
+
 #include <Adafruit_LiquidCrystal.h>
 
 // Pinos
@@ -17,11 +19,14 @@ Adafruit_LiquidCrystal lcd(0);
 int buttonState1 = 0;
 int buttonState2 = 0;
 int potValue = 0;
-int tempValue = 0;
+float tempValue = 0;
 int ldrValue = 0; // Valor do LDR
 
 // Funções
 void setup() {
+  
+  Serial.begin(9600);
+  
   // Inicializa os pinos
   pinMode(ledPin1, OUTPUT);
   pinMode(ledPin2, OUTPUT);
@@ -41,7 +46,7 @@ void loop() {
 
   // Lê o valor do LDR
   ldrValue = analogRead(A0); // LDR no pino A0
-  ldrValue = map(ldrValue, 0, 1023, 0, 100); // Mapeia para uma faixa de 0 a 100
+  ldrValue = map(ldrValue, 0, 1023, 0, 255); // Mapeia para uma faixa de 0 a 100
 
   // Escreve o valor do LCD na primeira linha
   exibirValoresLCD();
@@ -49,10 +54,13 @@ void loop() {
   // Lê o botão 1 e controla o LED no pino 13
   buttonState1 = digitalRead(buttonPin1);
   controlarLed1(buttonState1);
+  delay(10);
 
   // Lê o botão 2 e controla o LED no pino 11
   buttonState2 = digitalRead(buttonPin2);
+  Serial.println(buttonState2);
   controlarLed2(buttonState2);
+  delay(10);
 
   // Lê o valor do potenciômetro e calcula o valor do LED no pino 10
   potValue = analogRead(potPin);
@@ -61,15 +69,15 @@ void loop() {
   controlarLed3(ledBrightness);
 }
 
-// Função para ler a temperatura (Agora no pino A1)
-int lerTemperatura() {
+// Função para ler a temperatura
+float lerTemperatura() {
   int leitura = analogRead(tempPin);
-  return map(leitura, 0, 1023, -40, 125); // Mapeia o valor para a faixa de -40 a 125 °C
+  return(((analogRead(tempPin) * 5.0) / 1023) * 1000 - 500) / 10;
 }
 
 // Função para verificar se o buzzer deve ser acionado
 void verificarBuzzer(int temperatura) {
-  if (temperatura < 5) { // Ativa o buzzer se a temperatura for menor que 5°C
+  if (temperatura < 30) { // Ativa o buzzer se a temperatura for menor que 5°C
     digitalWrite(buzzerPin, HIGH);
   } else {
     digitalWrite(buzzerPin, LOW); // Desliga o buzzer se a temperatura for maior que 5°C
@@ -82,9 +90,9 @@ void exibirValoresLCD() {
   lcd.print("PT:");  // Exibe o valor do potenciômetro
   lcd.print(potValue);
   lcd.print(" L1:");  // Exibe o estado do LED 1 com A para Aceso e D para Desligado
-  lcd.print(digitalRead(ledPin1) == HIGH ? "A" : "D");
+  lcd.print(digitalRead(ledPin1) == HIGH ? "L" :"D");
   lcd.print(" L2:");  // Exibe o estado do LED 2 com A para Aceso e D para Desligado
-  lcd.print(digitalRead(ledPin2) == HIGH ? "A" : "D");
+  lcd.print(digitalRead(ledPin2) == HIGH ? "L" :"D");
 
   lcd.setCursor(0, 1);  // Segunda linha
   lcd.print("TP:");  // Exibe a temperatura
@@ -96,7 +104,7 @@ void exibirValoresLCD() {
 
 // Função para controlar o LED no pino 13 com base no botão 1
 void controlarLed1(int estadoBotao) {
-  if (estadoBotao == LOW) {  // Botão pressionado
+  if (estadoBotao == 0) {  // Botão pressionado
     digitalWrite(ledPin1, HIGH); // Liga o LED
   } else {
     digitalWrite(ledPin1, LOW); // Desliga o LED
@@ -105,7 +113,7 @@ void controlarLed1(int estadoBotao) {
 
 // Função para controlar o LED no pino 11 com base no botão 2
 void controlarLed2(int estadoBotao) {
-  if (estadoBotao == LOW) {  // Botão pressionado
+  if (estadoBotao == 0) {  // Botão pressionado
     digitalWrite(ledPin2, HIGH); // Liga o LED
   } else {
     digitalWrite(ledPin2, LOW); // Desliga o LED
@@ -126,4 +134,5 @@ void exibirPotenciometro(int valor) {
 void controlarLed3(int brilho) {
   analogWrite(ledPin3, brilho); // Controla o brilho do LED com PWM
 }
+
 
