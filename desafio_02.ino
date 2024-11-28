@@ -1,4 +1,4 @@
-//Desafio 2
+// Desafio 2
 
 #include <Adafruit_LiquidCrystal.h>
 
@@ -11,6 +11,7 @@ int buttonPin2 = 6;
 int potPin = A2;  // Potenciômetro no pino A2
 int tempPin = A1; // Sensor de temperatura no pino A1
 int buzzerPin = 8; // Buzzer no pino 8
+int ldrPin = A0;   // LDR no pino A0
 
 // LCD
 Adafruit_LiquidCrystal lcd(0);
@@ -45,8 +46,7 @@ void loop() {
   verificarBuzzer(tempValue);  // Decide se o buzzer deve ser ligado
 
   // Lê o valor do LDR
-  ldrValue = analogRead(A0); // LDR no pino A0
-  ldrValue = map(ldrValue, 0, 1023, 0, 255); // Mapeia para uma faixa de 0 a 100
+  ldrValue = analogRead(ldrPin); // Usando a variável ldrPin para o pino A0
 
   // Escreve o valor do LCD na primeira linha
   exibirValoresLCD();
@@ -77,7 +77,7 @@ float lerTemperatura() {
 
 // Função para verificar se o buzzer deve ser acionado
 void verificarBuzzer(int temperatura) {
-  if (temperatura < 30) { // Ativa o buzzer se a temperatura for menor que 5°C
+  if (temperatura < 10) { // Ativa o buzzer se a temperatura for menor que 5°C
     digitalWrite(buzzerPin, HIGH);
   } else {
     digitalWrite(buzzerPin, LOW); // Desliga o buzzer se a temperatura for maior que 5°C
@@ -98,8 +98,8 @@ void exibirValoresLCD() {
   lcd.print("TP:");  // Exibe a temperatura
   lcd.print(tempValue);
   lcd.print("C"); // Adiciona espaço para limpar a tela
-  lcd.print(" LD");  // Exibe o valor do LDR
-  lcd.print(ldrValue);
+  lcd.print(" LD:");  // Exibe o valor do LDR
+  lcd.print(ldrValue); // Exibe o valor do LDR
 }
 
 // Função para controlar o LED no pino 13 com base no botão 1
@@ -134,5 +134,3 @@ void exibirPotenciometro(int valor) {
 void controlarLed3(int brilho) {
   analogWrite(ledPin3, brilho); // Controla o brilho do LED com PWM
 }
-
-
