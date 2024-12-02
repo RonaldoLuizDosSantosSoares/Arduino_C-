@@ -97,7 +97,6 @@ void exibirValoresLCD() {
   lcd.setCursor(0, 1);  // Segunda linha
   lcd.print("TP:");  // Exibe a temperatura
   lcd.print(tempValue);
-  lcd.print("C"); // Adiciona espaço para limpar a tela
   lcd.print(" LD:");  // Exibe o valor do LDR
   lcd.print(ldrValue); // Exibe o valor do LDR
 }
