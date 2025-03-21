@@ -27,7 +27,7 @@ void setup() {
 
   // Exibe todas as notas no LCD
   exibirNotasNoLCD();
-  exibirEstadoLED(false); // Inicia com o LED desligado ("LD d")
+  exibirEstadoLED(false);
 }
 
 void loop() {
@@ -67,16 +67,16 @@ void exibirXNaNota(int noteIndex) {
   int linha = 0;
 
   // Calcula a posição do "x" com base no índice da nota
-  if (noteIndex < 4) { // Notas na primeira linha (DO, RE, MI, FA)
-    coluna = noteIndex * 4; // Cada nota ocupa 4 colunas
+  if (noteIndex < 4) {
+    coluna = noteIndex * 4;
     linha = 0;
-  } else { // Notas na segunda linha (SOL, LA, SI)
-    coluna = (noteIndex - 4) * 4; // Cada nota ocupa 4 colunas
+  } else {
+    coluna = (noteIndex - 4) * 4;
     linha = 1;
   }
 
-  lcd.setCursor(coluna + 2, linha); // Posiciona o cursor ao lado do nome da nota
-  lcd.print("x"); // Escreve "x" ao lado da nota
+  lcd.setCursor(coluna + 2, linha);
+  lcd.print("x");
 }
 
 // Função para remover o "x" da nota correspondente
