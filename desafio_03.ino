@@ -58,7 +58,7 @@ void exibirNotasNoLCD() {
   lcd.setCursor(0, 0);
   lcd.print("DO  RE  MI  FA");
   lcd.setCursor(0, 1);
-  lcd.print("SOL LA  SI  LD d");
+  lcd.print("SOL LA  SI  LD ");
 }
 
 // Função para exibir "x" na nota correspondente
