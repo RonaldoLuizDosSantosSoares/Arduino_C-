@@ -1,20 +1,17 @@
-// Ronaldo Luiz Dos Santos Soares 
+// Ronaldo Luiz Dos Santos Soares
 // Desafio 1
-  
+
 #include <Adafruit_LiquidCrystal.h>
 
-// Pinos
 int buzzerPin = 2;
 int buttonPins[] = {9, 8, 7, 6, 5, 4, 3};
 int ledPin = 13;
-int frequencies[] = {264, 297, 330, 352, 396, 440, 495}; // Frequências das notas musicais
-char* notes[] = {"DO", "RE", "MI", "FA", "SOL", "LA", "SI"}; // Nomes das notas
+int frequencies[] = {264, 297, 330, 352, 396, 440, 495};
+char* notes[] = {"DO", "RE", "MI", "FA", "SOL", "LA", "SI"};
 
-// LCD
 Adafruit_LiquidCrystal lcd(0);
 
 void setup() {
-  // Configura os pinos
   pinMode(buzzerPin, OUTPUT);
   for (int i = 0; i < 7; i++) {
     pinMode(buttonPins[i], INPUT_PULLUP);
@@ -22,38 +19,28 @@ void setup() {
   pinMode(ledPin, OUTPUT);
   noTone(buzzerPin);
 
-  // Inicializa o LCD
   lcd.begin(16, 2);
-
-  // Exibe todas as notas no LCD
-  exibirNotasNoLCD();
-  exibirEstadoLED(false);
+  limpa();
 }
 
 void loop() {
   bool botaoPressionado = false;
 
-  // Verifica o estado de cada botão
   for (int i = 0; i < 7; i++) {
     if (digitalRead(buttonPins[i]) == LOW) {
       botaoPressionado = true;
-      exibirXNaNota(i);
-      tone(buzzerPin, frequencies[i], 200);
-      exibirEstadoLED(true);
-      led_on();
-      delay(200);
-      limpaXDaNota(i);
+      led_on(i);
     }
   }
 
-  // Se nenhum botão foi pressionado, mantém o LED desligado
   if (!botaoPressionado) {
-    exibirEstadoLED(false);
+    lcd.setCursor(15, 1);
+    lcd.print("d");
   }
 }
 
-// Função para exibir todas as notas no LCD
-void exibirNotasNoLCD() {
+// Função que limpa e gerencia todo o display
+void limpa() {
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("DO  RE  MI  FA");
@@ -61,55 +48,21 @@ void exibirNotasNoLCD() {
   lcd.print("SOL LA  SI  LD ");
 }
 
-// Função para exibir "x" na nota correspondente
-void exibirXNaNota(int noteIndex) {
-  int coluna = 0;
-  int linha = 0;
-
-  // Calcula a posição do "x" com base no índice da nota
-  if (noteIndex < 4) {
-    coluna = noteIndex * 4;
-    linha = 0;
-  } else {
-    coluna = (noteIndex - 4) * 4;
-    linha = 1;
-  }
-
+// Função que acende o LED e gerencia todas as ações do botão pressionado
+void led_on(int noteIndex) {
+  int coluna = (noteIndex < 4) ? noteIndex * 4 : (noteIndex - 4) * 4;
+  int linha = (noteIndex < 4) ? 0 : 1;
   lcd.setCursor(coluna + 2, linha);
   lcd.print("x");
-}
 
-// Função para remover o "x" da nota correspondente
-void limpaXDaNota(int noteIndex) {
-  int coluna = 0;
-  int linha = 0;
+  lcd.setCursor(15, 1);
+  lcd.print("l");
 
-  // Calcula a posição do "x" com base no índice da nota
-  if (noteIndex < 4) {
-    coluna = noteIndex * 4;
-    linha = 0;
-  } else {
-    coluna = (noteIndex - 4) * 4;
-    linha = 1;
-  }
-
-  lcd.setCursor(coluna + 2, linha); // Posiciona o cursor ao lado do nome da nota
-  lcd.print(" "); // Remove o "x" da nota
-}
-
-// Função para exibir o estado do LED
-void exibirEstadoLED(bool estadoLED) {
-  lcd.setCursor(12, 1); // Posiciona o cursor na posição do "LD"
-  if (estadoLED) {
-    lcd.print("LD l"); // LED ligado
-  } else {
-    lcd.print("LD d"); // LED desligado
-  }
-}
-
-// Função para acender e apagar o LED
-void led_on() {
+  tone(buzzerPin, frequencies[noteIndex], 200);
   digitalWrite(ledPin, HIGH);
   delay(200);
+
+  lcd.setCursor(coluna + 2, linha);
+  lcd.print(" ");
   digitalWrite(ledPin, LOW);
 }
